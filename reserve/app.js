@@ -745,11 +745,11 @@ fileInput.addEventListener('change', () => {
     card?.classList.remove('has-error');
 
     // اگر فایلی انتخاب نشد (یا لغو شد) → پاکسازی و خروج
-    if (!file) {
-        fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
-        State.selections.file = null;
-        return;
-    }
+    //if (!file) {
+        //fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
+        //State.selections.file = null;
+       // return;
+    //}
 
     if (file.size > CONFIG.MAX_FILE_SIZE) {
         UI.showError('file', 'size');
@@ -871,11 +871,11 @@ function validate() {
         return false;
     }
 
-    if (!file) {
-        UI.showError('file', 'empty');
-        scrollToAndFocus('#fileInput');
-        return false;
-    }
+    //if (!file) {
+       // UI.showError('file', 'empty');
+       // scrollToAndFocus('#fileInput');
+      //  return false;
+   // }
 
     return true;
 }
