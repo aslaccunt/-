@@ -744,11 +744,11 @@ renderSelfie() {
 
         card?.classList.remove('has-error');
 
-        if (!file) {
-            fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
-            State.selections.file = null;
-            return;
-        }
+        //if (!file) {
+           // fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
+          //  State.selections.file = null;
+           // return;
+        //}
 
         if (file.size > CONFIG.MAX_FILE_SIZE) {
             UI.showError('file', 'size');
