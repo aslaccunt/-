@@ -4,8 +4,8 @@ const CONFIG = {
     IMAGE_PATH: '../data/image',
     MAX_FILE_SIZE: 10 * 1024 * 1024, // 5MB
     CURRENCY: 'تومان',
-    WALLET_URL: '/wallet',    
-    ORDERS_URL: '/done',   
+    WALLET_URL: '../wallet',    
+    ORDERS_URL: '../done',   
     TEMP_MODE: true,           
 };
 
@@ -985,13 +985,13 @@ async function init() {
     State.code = code;
 
     document.getElementById('navPrev').addEventListener('click', () => {
-        location.href = "/";
+        location.href = "../";
     });
     document.getElementById('navNext').addEventListener('click', () => {
-        location.href = "/";
+        location.href = "../";
     });
     document.getElementById('galleryBtn').addEventListener('click', () => {
-        location.href = "/gallery?code=" + code;
+        location.href = "../gallery?code=" + code;
     });
 
 
