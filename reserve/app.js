@@ -739,40 +739,41 @@ renderSelfie() {
     const fileNameEl = $('#fileName');
     const card = $('#selfieCard');
 
-    fileInput.addEventListener('change', () => {
-        const file = fileInput.files[0];
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
 
-        card?.classList.remove('has-error');
+    card?.classList.remove('has-error');
 
-        //if (!file) {
-           // fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
-          //  State.selections.file = null;
-           // return;
-        //}
+    // اگر فایلی انتخاب نشد (یا لغو شد) → پاکسازی و خروج
+    if (!file) {
+        fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
+        State.selections.file = null;
+        return;
+    }
 
-        if (file.size > CONFIG.MAX_FILE_SIZE) {
-            UI.showError('file', 'size');
-            fileInput.value = '';
-            fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
-            State.selections.file = null;
-            return;
-        }
+    if (file.size > CONFIG.MAX_FILE_SIZE) {
+        UI.showError('file', 'size');
+        fileInput.value = '';
+        fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
+        State.selections.file = null;
+        return;
+    }
 
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
-        const allowedExts = /\.(jpe?g|png|webp|pdf)$/i;
-        if (!allowedTypes.includes(file.type) && !allowedExts.test(file.name)) {
-            UI.showError('file', 'type');
-            fileInput.value = '';
-            fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
-            State.selections.file = null;
-            return;
-        }
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+    const allowedExts = /\.(jpe?g|png|webp|pdf)$/i;
+    if (!allowedTypes.includes(file.type) && !allowedExts.test(file.name)) {
+        UI.showError('file', 'type');
+        fileInput.value = '';
+        fileNameEl.textContent = 'هیچ عکسی انتخاب نشده';
+        State.selections.file = null;
+        return;
+    }
 
-        fileNameEl.textContent = file.name;
-        State.selections.file = file;
-        card?.classList.remove('has-error');
-        vibrate(6);
-    });
+    fileNameEl.textContent = file.name;
+    State.selections.file = file;
+    card?.classList.remove('has-error');
+    vibrate(6);
+});
 },
 
 renderTotal() {
