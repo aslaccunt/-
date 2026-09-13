@@ -192,9 +192,7 @@
         return lines.join('\n');
     }
 
-    // ═══════════════════════════════════
-    // باز کردن تلگرام با متن آماده
-    // ═══════════════════════════════════
+
     function openTelegramWithText() {
         const text   = encodeURIComponent(buildMessage());
         const webUrl = `https://t.me/${ADMIN_USERNAME}?text=${text}`;
