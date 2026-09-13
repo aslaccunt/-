@@ -1,0 +1,69 @@
+:root {
+    --color-black: #000;
+    --color-white: #fff;
+    --color-white-soft: #FFFFFF;
+
+    --bg-body: #000;
+    --bg-gradient-1: #0A1F3D;
+    --bg-gradient-2: #050B18;
+    --bg-gradient-3: #000000;
+    --bg-nav-gradient-start: rgba(5, 11, 24, 0.95);
+    --bg-nav-gradient-end: rgba(5, 11, 24, 0);
+
+    --text-primary: #FFFFFF;
+    --text-secondary: #8E8E93;
+    --text-tertiary: #6E6E73;
+    --text-muted: #48484A;
+    --text-footnote: #48484A;
+
+    --color-blue: #0A84FF;
+    --color-blue-dark: #0060CC;
+    --color-blue-shadow: rgba(10, 132, 255, 0.3);
+    --color-blue-shadow-active: rgba(10, 132, 255, 0.4);
+
+    --color-green: #30D158;
+
+    --color-red: #FF453A;
+
+    --bg-card: #1C1C1E;
+    --bg-card-active: #2C2C2E;
+    --bg-surface: #1C1C1E;
+    --bg-surface-active: #2C2C2E;
+    --bg-avatar: #1C1C1E;
+    --bg-button-circle: #1C1C1E;
+    --bg-button-circle-active: #2C2C2E;
+
+    --border-separator: #2C2C2E;
+
+    --switch-track-off: #39393D;
+    --switch-thumb: #FFFFFF;
+    --checkbox-border: #48484A;
+    --range-track: #39393D;
+    --range-thumb: #FFFFFF;
+
+    --shadow-white-008: rgba(255, 255, 255, 0.08);
+    --shadow-white-006: rgba(255, 255, 255, 0.06);
+    --shadow-white-004: rgba(255, 255, 255, 0.04);
+    --shadow-white-005: rgba(255, 255, 255, 0.05);
+    --shadow-white-01: rgba(255, 255, 255, 0.1);
+    --shadow-black-035: rgba(0, 0, 0, 0.35);
+    --shadow-black-04: rgba(0, 0, 0, 0.4);
+    --shadow-black-06: rgba(0, 0, 0, 0.6);
+    --shadow-black-03: rgba(0, 0, 0, 0.3);
+    --shadow-black-015: rgba(0, 0, 0, 0.15);
+    --shadow-black-016: rgba(0, 0, 0, 0.16);
+    --shadow-black-005: rgba(0, 0, 0, 0.05);
+
+    --vip-gradient-1: #FFE066;
+    --vip-gradient-2: #FFC700;
+    --vip-gradient-3: #FF9F0A;
+    --vip-text: #1A1200;
+    --vip-shadow: rgba(255, 214, 10, 0.5);
+    --vip-shadow-glow: rgba(255, 180, 0, 0.3);
+
+    --banner-bg: rgba(204, 8, 8, 0.95);
+
+    --color-price: #3091d1b7;
+
+    --bg-span: #3d0a0a3a;
+}
