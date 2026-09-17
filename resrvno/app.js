@@ -5,7 +5,7 @@ const CONFIG = {
     MAX_FILE_SIZE: 10 * 1024 * 1024, // 5MB
     CURRENCY: 'تومان',
     WALLET_URL: '../wallet',    
-    ORDERS_URL: '../done',   
+    ORDERS_URL: '../done/index.html',   
     TEMP_MODE: true,           
 };
 
@@ -851,25 +851,23 @@ function redirectToNextPage(payload) {
     const { isVip, prepayment, remaining } = State.calculatePrepayment();
     const hasPrepayment = isVip && prepayment > 0;
 
-    try {
-        sessionStorage.setItem('bookingPayload', JSON.stringify(payload));
-        sessionStorage.setItem('bookingTimestamp', Date.now().toString());
-    } catch (e) {
-        console.warn('sessionStorage unavailable:', e);
-    }
-
-    // ✅ extras رو به صورت JSON encode شده بفرست
-    const extrasJSON = JSON.stringify(payload.extras || []);
+    // extras رو به فرمت ساده سوالی تبدیل کن (label|price)
+    const extrasStr = (payload.extras || [])
+        .map(ex => `${ex.id}~${ex.label}~${ex.price}`)
+        .join(',');
 
     const params = new URLSearchParams({
         code: payload.code || '',
         name: payload.profileName || '',
+        profileType: payload.profileType || '',
         fullName: payload.fullName || '',
         phone: payload.phone || '',
         bookingType: payload.bookingType || '',
         bookingTypeLabel: payload.bookingTypeLabel || '',
+        subOptionId: payload.subOption?.optionId || '',
         subOption: payload.subOption?.label || '',
         subOptionPrice: payload.subOption?.price || 0,
+        timeId: payload.time?.id || '',
         time: payload.time?.label || '',
         timePrice: payload.time?.price || 0,
         location: payload.location?.label || '',
@@ -877,7 +875,7 @@ function redirectToNextPage(payload) {
         locationPrice: payload.location?.price || 0,
         address: payload.address || '',
         notes: payload.notes || '',
-        extras: extrasJSON,   // ✅ JSON string
+        extras: extrasStr,          // ✅ رشته ساده، نه JSON
         total: payload.totalPrice || 0,
         prepayment: prepayment || 0,
         remaining: remaining || 0,
