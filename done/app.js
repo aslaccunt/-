@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    'use strict'; 
 
     const ADMIN_USERNAME = 'AsalSup';
     const ADMIN_PLATFORM = 'telegram';
@@ -13,51 +13,48 @@
         d.textContent = String(str ?? '');
         return d.innerHTML;
     };
-    const getParam = (key) => new URLSearchParams(location.search).get(key) || '';
+const getParam = (key) => new URLSearchParams(location.search).get(key) || '';
 
-    let payload = {};
-    try {
-        const raw = sessionStorage.getItem('bookingPayload');
-        if (raw) payload = JSON.parse(raw);
-    } catch (e) { console.warn(e); }
+// ✅ خواندن مستقیم از URL — بدون sessionStorage
+const parseExtras = (raw) => {
+    if (!raw) return [];
+    return raw.split(',').filter(Boolean).map(item => {
+        const [id, label, price] = item.split('~');
+        return { id, label, price: Number(price) || 0 };
+    });
+};
 
-    if (!payload || !Object.keys(payload).length) {
-        let extrasFromUrl = [];
-        const extrasRaw = getParam('extras');
-        if (extrasRaw) {
-            try { extrasFromUrl = JSON.parse(extrasRaw); }
-            catch (e) {
-                extrasFromUrl = extrasRaw.split(',').filter(Boolean)
-                    .map(id => ({ id, label: id, price: 0 }));
-            }
-        }
-        payload = {
-            code: getParam('code'),
-            profileName: getParam('name'),
-            fullName: getParam('fullName'),
-            phone: getParam('phone'),
-            subOption: {
-                label: getParam('subOption'),
-                price: Number(getParam('subOptionPrice')) || 0,
-            },
-            time: {
-                label: getParam('time'),
-                price: Number(getParam('timePrice')) || 0,
-            },
-            location: {
-                id: getParam('locationId'),
-                label: getParam('location'),
-                price: Number(getParam('locationPrice')) || 0,
-            },
-            address: getParam('address'),
-            notes: getParam('notes'),
-            extras: extrasFromUrl,
-            totalPrice: Number(getParam('total')) || 0,
-            prepayment: Number(getParam('prepayment')) || 0,
-            remaining: Number(getParam('remaining')) || 0,
-            isVip: getParam('isVip') === '1',
-        };
-    }
+const payload = {
+    code: getParam('code'),
+    profileName: getParam('name'),
+    profileType: getParam('profileType'),
+    fullName: getParam('fullName'),
+    phone: getParam('phone'),
+    bookingType: getParam('bookingType'),
+    bookingTypeLabel: getParam('bookingTypeLabel'),
+    subOption: {
+        id: getParam('subOptionId'),
+        label: getParam('subOption'),
+        price: Number(getParam('subOptionPrice')) || 0,
+    },
+    time: {
+        id: getParam('timeId'),
+        label: getParam('time'),
+        price: Number(getParam('timePrice')) || 0,
+    },
+    location: {
+        id: getParam('locationId'),
+        label: getParam('location'),
+        price: Number(getParam('locationPrice')) || 0,
+    },
+    address: getParam('address'),
+    notes: getParam('notes'),
+    extras: parseExtras(getParam('extras')),   // ✅ پارس رشته ساده
+    totalPrice: Number(getParam('total')) || 0,
+    prepayment: Number(getParam('prepayment')) || 0,
+    remaining: Number(getParam('remaining')) || 0,
+    isVip: getParam('isVip') === '1',
+};
 
     const generateTrackingCode = () => {
         const chars = 'ABCDEF0123456789';
@@ -134,23 +131,18 @@
     }
     renderInvoice();
 
-    function renderExtras() {
-        let extras = payload.extras;
-        if (typeof extras === 'string') {
-            try { extras = JSON.parse(extras); }
-            catch (e) { extras = extras.split(',').filter(Boolean).map(id => ({ id, label: id, price: 0 })); }
-        }
-        if (!Array.isArray(extras) || !extras.length) return;
+function renderExtras() {
+    let extras = payload.extras;
+    if (!Array.isArray(extras) || !extras.length) return;
 
-        $('extrasSection').style.display = '';
-        $('tagsContainer').innerHTML = extras.map(ex => {
-            if (typeof ex === 'string') ex = { label: ex, price: 0 };
-            const label = ex.label || ex.title || ex.id || '';
-            const price = Number(ex.price) || 0;
-            const priceHTML = price > 0 ? `<span class="ext-price">+${formatPrice(price)}</span>` : '';
-            return `<span class="ex-tag">${escapeHTML(label)}${priceHTML}</span>`;
-        }).join('');
-    }
+    $('extrasSection').style.display = '';
+    $('tagsContainer').innerHTML = extras.map(ex => {
+        const label = ex.label || ex.id || '';
+        const price = Number(ex.price) || 0;
+        const priceHTML = price > 0 ? `<span class="ext-price">+${formatPrice(price)}</span>` : '';
+        return `<span class="ex-tag">${escapeHTML(label)}${priceHTML}</span>`;
+    }).join('');
+}
     renderExtras();
 
 function buildAdminMessage() {
