@@ -1,0 +1,169 @@
+{
+    "profile": {
+        "name": "سارا",
+        "type": "معمولی",
+        "status": "online",
+        "age": 24,
+        "height": 165,
+        "weight": 64,
+        "bodyType": "متناسب",
+        "bust": "متوسط",
+        "hips": "خوش‌فرم",
+        "rating": 4.0,
+        "description": "هات و مهربون، خوشگل، ساکشن در صورت تمیزی آقا"
+    },
+
+    "bookingTypes": [
+        {
+            "id": "Hourly",
+            "label": "ساعتی",
+            "timeOptions": [
+                {
+                    "id": "low",
+                    "label": "عادی",
+                    "title": "بین ۳ تا ۶ ساعت آینده",
+                    "description": "مناسب افرادی که زمان کافی دارند و عجله‌ای نیست.",
+                    "icon": "clock",
+                    "status": true,
+                    "price": 0
+                },
+                {
+                    "id": "normal",
+                    "label": "نیمه فوری",
+                    "title": "بین ۱ تا ۳ ساعت آینده",
+                    "description": "گزینه‌ای متعادل برای کسانی که نسبتاً زود می‌خواهند.",
+                    "icon": "clock",
+                    "status": true,
+                    "price": 0
+                },
+                {
+                    "id": "high",
+                    "label": "فوری",
+                    "title": "کمتر از نیم ساعت",
+                    "description": "سریع‌ترین زمان ممکن برای کسانی که عجله دارند.",
+                    "icon": "clock",
+                    "status": true,
+                    "price": 100000
+                }
+            ],
+            "options": [
+                {
+                    "id": "Hourly-Roundly",
+                    "label": "برنامه راندی",
+                    "sub": "یک ساعت زمان - یک راند ارضا",
+                    "price": 950000
+                },
+                {
+                    "id": "Hourly-Timely",
+                    "label": "برنامه ساعتی",
+                    "sub": "یک ساعت زمان - ارضا نامحدود",
+                    "price": 1300000
+                }
+            ]
+        },
+        {
+            "id": "Nightly",
+            "label": "شب خواب",
+            "timeOptions": [
+                {
+                    "id": "low",
+                    "label": "عادی",
+                    "title": "بین ۳ شب تا یک هفته آینده",
+                    "description": "مناسب افرادی که زمان کافی دارند و عجله‌ای نیست.",
+                    "icon": "clock",
+                    "status": true,
+                    "price": 0
+                },
+                {
+                    "id": "normal",
+                    "label": "نیمه فوری",
+                    "title": "بین ۱ تا ۳ شب آینده",
+                    "description": "گزینه‌ای متعادل برای کسانی که نسبتاً زود می‌خواهند.",
+                    "icon": "clock",
+                    "status": true,
+                    "price": 0
+                },
+                {
+                    "id": "high",
+                    "label": "فوری (امشب)",
+                    "title": "انجام برنامه همین امشب",
+                    "description": "سریع‌ترین زمان ممکن برای کسانی که عجله دارند.",
+                    "icon": "clock",
+                    "status": true,
+                    "price": 130000
+                }
+            ],
+            "options": [
+                {
+                    "id": "Nightly-Roundly",
+                    "label": "شب خواب راندی",
+                    "sub": "ساعت 12 شب الی 8 صبح - 3 راند ارضا",
+                    "price": 3000000
+                },
+                {
+                    "id": "Nightly-Timely",
+                    "label": "شب خواب فول",
+                    "sub": "ساعت 12 شب الی 8 صبح - ارضا نامحدود",
+                    "price": 3600000
+                }
+            ]
+        }
+    ],
+
+    "extras": [
+        {
+            "id": "Oral",
+            "label": "ساکشن / اورال",
+            "sub": "ساک حرفه‌ای و لذت‌بخش",
+            "price": 400000
+        },
+        {
+            "id": "Anal",
+            "label": "سکس از عقب / آنال",
+            "sub": "تجربه عمیق و پرشور از پشت",
+            "price": 500000
+        }
+    ],
+
+    "timeOptions": [
+        {
+            "id": "low",
+            "label": "عادی",
+            "title": "بین ۳ تا ۶ ساعت آینده",
+            "description": "مناسب افرادی که زمان کافی دارند و عجله‌ای نیست.",
+            "icon": "clock",
+            "status": true,
+            "price": 0
+        },
+        {
+            "id": "normal",
+            "label": "نیمه فوری",
+            "title": "بین ۱ تا ۳ ساعت آینده",
+            "description": "گزینه‌ای متعادل برای کسانی که نسبتاً زود می‌خواهند.",
+            "icon": "clock",
+            "status": true,
+            "price": 0
+        },
+        {
+            "id": "high",
+            "label": "فوری",
+            "title": "کمتر از نیم ساعت",
+            "description": "سریع‌ترین زمان ممکن برای کسانی که عجله دارند.",
+            "icon": "clock",
+            "status": true,
+            "price": 100000
+        }
+    ],
+
+    "locations": [
+        {
+            "id": "Hostly",
+            "label": "مکان خانم",
+            "price": 0,
+            "hasInput": true,
+            "address": "مشهد، دلاوران"
+        }
+    ],
+
+    "footnote": "درصورت وجود هرگونه سوال به پیوی ادمین پیام بدید"
+}

@@ -1,0 +1,78 @@
+{
+    "profile": {
+        "name": "سمانه",
+        "type": "معمولی",         
+        "status": "online",     
+        "age": 32,
+        "height": 165,
+        "weight": 75,
+        "bodyType": "سفید و تپل",
+        "bust": 80,
+        "hips": "سفید و توپر",
+        "rating": 0.0,
+        "description": "خوش برخورد، شیک‌پوش و فول انرژی"
+    },
+
+    "bookingTypes": [
+        {
+            "id": "Hourly",
+            "label": "ساعتی",
+            "timeOptions": [
+                {
+                    "id": "noselect",
+                    "label": "تایم آزاد خانم",
+                    "title": "اختصاص تایم توسط خانم انجام میشود.",
+                    "description": "با توجه به اولویت رزرو ها خانم نزدیک ترین تایم خالی رو به شما اختصاص میده..",
+                    "icon": "clock",
+                    "status": true,
+                    "price": 0
+                }
+            ],
+            "options": [
+                {
+                    "id": "Hourly-Roundly",
+                    "label": "برنامه یک راندی",
+                    "sub": "یک ساعت زمان - یک راند ارضا",
+                    "price": 1800000,
+                    "backp": 1300000
+                },
+                {
+                    "id": "Hourly-Timely",
+                    "label": "برنامه دو راندی",
+                    "sub": "یک ساعت زمان - دو راند ارضا",
+                    "price": 3300000,
+                    "backp": 2600000
+                }
+            ]
+        }
+    ],
+
+    "extras": [
+        {
+            "id": "Mistress",
+            "label": "میسترس / ارباب و برده",
+            "sub": "سلطه، فرمان‌برداری و بازی قدرت",
+            "price": 3300000,
+            "backp": 2500000
+        },
+        {
+            "id": "Mafol",
+            "label": "برای مفعول ها",
+            "sub": "استفاده از دیلدو",
+            "price": 2000000,
+            "backp": 1500000
+        }
+    ],
+
+  "locations": [
+    {
+        "id": "Hostly",
+        "label": "مکان خانم",
+        "price": 0,
+        "hasInput": true,
+        "address": "مشهد، شریعتی"
+    }
+  ],
+
+  "footnote": "درصورت وجود هرگونه سوال به پیوی ادمین پیام بدید"          
+}
