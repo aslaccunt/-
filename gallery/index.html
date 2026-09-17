@@ -1,15 +1,249 @@
-<!DOCTYPE html><html dir="rtl" lang="fa"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/><title>گالری عکس</title><link href="../fonts/font.css" rel="stylesheet"/><link href="../root.css" rel="stylesheet"/><link href="../gallery/style.css" rel="stylesheet"/></head><body><div class="screen"><div class="nav-bar"><button class="nav-btn" onclick="history.back()" type="button"><svg viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> بازگشت </button></div><div class="page-header"><h1 class="large-title">گالری عکس ها</h1><p class="subtitle" id="codeLabel">CODE: ---</p></div><div class="gallery-section"><div class="photo-grid" id="gridToday"></div><button class="load-more-btn" id="loadMore" type="button"> رزرو تایم برنامه </button></div></div><div class="viewer" id="viewer"><div class="viewer-nav"><button id="viewerClose" type="button"><svg viewbox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg></button><span class="viewer-counter" id="viewerCounter">۰ / ۰</span><button type="button"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button></div><div class="viewer-image-wrapper"><img alt="" id="viewerImage" src=""/><button class="viewer-arrow next" id="prevBtn" type="button"><svg viewbox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button><button class="viewer-arrow prev" id="nextBtn" type="button"><svg viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div></div><script>(function(){const params=new URLSearchParams(window.location.search);const code=params.get('code')||'100';document.getElementById('codeLabel').textContent=`CODE:${code}`;const basePath=`../data/image/${code}/`;const grid=document.getElementById('gridToday');const SKELETON_COUNT=6;function showSkeletons(count){grid.innerHTML='';for(let i=0;i<count;i++){const sk=document.createElement('div');sk.className='photo-item skeleton';grid.appendChild(sk);}}
-function showSpinner(){grid.innerHTML=`<div class="loading-spinner"><div class="spinner"></div><span>در حال بارگذاری...</span></div>`;}
-showSkeletons(SKELETON_COUNT);const MAX_CHECK=200;const extensions=['jpg','jpeg','png','webp'];const photos=[];function checkImage(url){return new Promise((resolve)=>{const img=new Image();img.onload=()=>resolve(url);img.onerror=()=>resolve(null);img.src=url;});}
-async function findImageForNumber(n){for(const ext of extensions){const url=`${basePath}${n}.${ext}`;const found=await checkImage(url);if(found)return found;}
-return null;}
-async function loadAllPhotos(){let consecutiveMisses=0;const MISS_LIMIT=3;for(let n=1;n<=MAX_CHECK;n++){const url=await findImageForNumber(n);if(url){photos.push({id:n,src:url});consecutiveMisses=0;}else{consecutiveMisses++;if(consecutiveMisses>=MISS_LIMIT)break;}}}
-const playIcon='<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';function renderGrid(){grid.innerHTML='';if(photos.length===0){grid.innerHTML='<p class="empty-msg">عکس جدیدی وجود ندارد، برای دیدن عکس ها به کانال تلگرام مراجعه کنید.</p>';return;}
-photos.forEach((photo,i)=>{const div=document.createElement('div');div.className='photo-item skeleton';div.dataset.index=i;const img=document.createElement('img');img.src=photo.src;img.alt='';img.loading='lazy';img.addEventListener('load',()=>{img.classList.add('loaded');div.classList.remove('skeleton');});img.addEventListener('error',()=>{div.classList.remove('skeleton');div.style.background='rgba(255,0,0,0.1)';});div.appendChild(img);if(photo.video){const badge=document.createElement('span');badge.className='photo-video-icon';badge.innerHTML=playIcon;div.appendChild(badge);}
-div.addEventListener('click',()=>openViewer(i));grid.appendChild(div);});}
-const viewer=document.getElementById('viewer');const viewerImage=document.getElementById('viewerImage');const viewerCounter=document.getElementById('viewerCounter');const prevBtn=document.getElementById('prevBtn');const nextBtn=document.getElementById('nextBtn');let currentIndex=0;const toPersianNum=n=>n.toString().replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);function openViewer(index){currentIndex=index;updateViewer();viewer.classList.add('open');document.body.style.overflow='hidden';}
-function closeViewer(){viewer.classList.remove('open');document.body.style.overflow='';}
-function updateViewer(){const photo=photos[currentIndex];if(!photo)return;viewerImage.style.opacity='0';setTimeout(()=>{viewerImage.src=photo.src;viewerImage.style.opacity='1';},120);viewerCounter.textContent=`${toPersianNum(currentIndex+1)}/${toPersianNum(photos.length)}`;prevBtn.style.display=currentIndex===0?'none':'flex';nextBtn.style.display=currentIndex===photos.length-1?'none':'flex';}
-function goPrev(){if(currentIndex>0){currentIndex--;updateViewer();}}
-function goNext(){if(currentIndex<photos.length-1){currentIndex++;updateViewer();}}
-document.getElementById('viewerClose').addEventListener('click',closeViewer);prevBtn.addEventListener('click',goPrev);nextBtn.addEventListener('click',goNext);document.addEventListener('keydown',(e)=>{if(!viewer.classList.contains('open'))return;if(e.key==='Escape')closeViewer();if(e.key==='ArrowLeft')goNext();if(e.key==='ArrowRight')goPrev();});let touchStartX=0,touchStartY=0;viewer.addEventListener('touchstart',(e)=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});viewer.addEventListener('touchend',(e)=>{const dx=e.changedTouches[0].clientX-touchStartX;const dy=e.changedTouches[0].clientY-touchStartY;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){if(dx>0)goNext();else goPrev();}},{passive:true});(async function init(){showSpinner();await loadAllPhotos();renderGrid();})();document.getElementById('loadMore').addEventListener('click',()=>{location.href="../reserve?code="+code;});})();</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>گالری عکس</title>
+    <link rel="stylesheet" href="../fonts/font.css" />
+    <link rel="stylesheet" href="../root.css" />
+    <link rel="stylesheet" href="../gallery/style.css" />
+</head>
+<body>
+
+<div class="screen">
+    <div class="nav-bar">
+        <button class="nav-btn" type="button" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            بازگشت
+        </button>
+    </div>
+    <div class="page-header">
+        <h1 class="large-title">گالری عکس ها</h1>
+        <p class="subtitle" id="codeLabel">CODE: ---</p>
+    </div>
+
+    <div class="gallery-section">
+        <div class="photo-grid" id="gridToday"></div>
+        <button class="load-more-btn" id="loadMore" type="button">
+            رزرو تایم برنامه
+        </button>
+    </div>
+</div>
+
+<div class="viewer" id="viewer">
+    <div class="viewer-nav">
+        <button type="button" id="viewerClose">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <span class="viewer-counter" id="viewerCounter">۰ / ۰</span>
+        <button type="button">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+        </button>
+    </div>
+    <div class="viewer-image-wrapper">
+        <img id="viewerImage" src="" alt="">
+        <button class="viewer-arrow next" id="prevBtn" type="button">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="viewer-arrow prev" id="nextBtn" type="button">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+    </div>
+</div>
+
+<script>
+(function () {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code') || '100';
+    document.getElementById('codeLabel').textContent = `CODE: ${code}`;
+
+    const basePath = `../data/image/${code}/`;
+
+    const grid = document.getElementById('gridToday');
+    const SKELETON_COUNT = 6;
+
+    function showSkeletons(count) {
+        grid.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+            const sk = document.createElement('div');
+            sk.className = 'photo-item skeleton';
+            grid.appendChild(sk);
+        }
+    }
+
+    function showSpinner() {
+        grid.innerHTML = `
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <span>در حال بارگذاری...</span>
+            </div>
+        `;
+    }
+
+    showSkeletons(SKELETON_COUNT);
+
+    const MAX_CHECK = 200;
+    const extensions = ['jpg', 'jpeg', 'png', 'webp'];
+    const photos = [];
+
+    function checkImage(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(url);
+            img.onerror = () => resolve(null);
+            img.src = url;
+        });
+    }
+
+    async function findImageForNumber(n) {
+        for (const ext of extensions) {
+            const url = `${basePath}${n}.${ext}`;
+            const found = await checkImage(url);
+            if (found) return found;
+        }
+        return null;
+    }
+
+    async function loadAllPhotos() {
+        let consecutiveMisses = 0;
+        const MISS_LIMIT = 3;
+
+        for (let n = 1; n <= MAX_CHECK; n++) {
+            const url = await findImageForNumber(n);
+            if (url) {
+                photos.push({ id: n, src: url });
+                consecutiveMisses = 0;
+            } else {
+                consecutiveMisses++;
+                if (consecutiveMisses >= MISS_LIMIT) break;
+            }
+        }
+    }
+
+    const playIcon = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+
+    function renderGrid() {
+        grid.innerHTML = '';
+
+        if (photos.length === 0) {
+            grid.innerHTML = '<p class="empty-msg">عکس جدیدی وجود ندارد، برای دیدن عکس ها به کانال تلگرام مراجعه کنید.</p>';
+            return;
+        }
+
+        photos.forEach((photo, i) => {
+            const div = document.createElement('div');
+            div.className = 'photo-item skeleton';
+            div.dataset.index = i;
+
+            const img = document.createElement('img');
+            img.src = photo.src;
+            img.alt = '';
+            img.loading = 'lazy';
+
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+                div.classList.remove('skeleton');
+            });
+
+            img.addEventListener('error', () => {
+                div.classList.remove('skeleton');
+                div.style.background = 'rgba(255,0,0,0.1)';
+            });
+
+            div.appendChild(img);
+
+            if (photo.video) {
+                const badge = document.createElement('span');
+                badge.className = 'photo-video-icon';
+                badge.innerHTML = playIcon;
+                div.appendChild(badge);
+            }
+
+            div.addEventListener('click', () => openViewer(i));
+            grid.appendChild(div);
+        });
+    }
+
+    const viewer = document.getElementById('viewer');
+    const viewerImage = document.getElementById('viewerImage');
+    const viewerCounter = document.getElementById('viewerCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+
+    const toPersianNum = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+    function openViewer(index) {
+        currentIndex = index;
+        updateViewer();
+        viewer.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeViewer() {
+        viewer.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function updateViewer() {
+        const photo = photos[currentIndex];
+        if (!photo) return;
+        viewerImage.style.opacity = '0';
+        setTimeout(() => {
+            viewerImage.src = photo.src;
+            viewerImage.style.opacity = '1';
+        }, 120);
+        viewerCounter.textContent = `${toPersianNum(currentIndex + 1)} / ${toPersianNum(photos.length)}`;
+        prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
+        nextBtn.style.display = currentIndex === photos.length - 1 ? 'none' : 'flex';
+    }
+
+    function goPrev() {
+        if (currentIndex > 0) { currentIndex--; updateViewer(); }
+    }
+    function goNext() {
+        if (currentIndex < photos.length - 1) { currentIndex++; updateViewer(); }
+    }
+
+    document.getElementById('viewerClose').addEventListener('click', closeViewer);
+    prevBtn.addEventListener('click', goPrev);
+    nextBtn.addEventListener('click', goNext);
+
+    document.addEventListener('keydown', (e) => {
+        if (!viewer.classList.contains('open')) return;
+        if (e.key === 'Escape') closeViewer();
+        if (e.key === 'ArrowLeft') goNext();
+        if (e.key === 'ArrowRight') goPrev();
+    });
+
+    let touchStartX = 0, touchStartY = 0;
+    viewer.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    viewer.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 0) goNext();
+            else goPrev();
+        }
+    }, { passive: true });
+
+    (async function init() {
+        showSpinner();
+        await loadAllPhotos();
+        renderGrid();
+
+    })();
+
+    document.getElementById('loadMore').addEventListener('click', () => {
+        location.href = "../reserve?code=" + code; 
+    });
+
+})();
+</script>
+
+</body>
+</html>

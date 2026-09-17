@@ -1,1 +1,106 @@
-<!DOCTYPE html><html dir="rtl" lang="fa"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/><title>رسید رزرو · ماساژ</title><link href="../fonts/font.css" rel="stylesheet"/><link href="../root.css" rel="stylesheet"/><link href="../done/style.css" rel="stylesheet"/></head><body><div class="screen"><div class="nav-bar"><button class="nav-btn" onclick="history.back()" type="button"><svg viewbox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg> بازگشت </button><span class="nav-title">رسید رزرو</span><span class="nav-spacer"></span></div><header class="receipt-head"><div class="rh-icon"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><h2 class="rh-title">در انتظار تأیید ادمین</h2><p class="rh-sub"> تصویر این رسید را برای ادمین ارسال کنید تا رزرو نهایی شود </p><div class="rh-divider"></div></header><div class="receipt"><div class="code-bar"><span class="cb-label">کد پیگیری</span><span class="cb-value" id="trackingCode">—</span><button aria-label="کپی" class="cb-copy" id="copyBtn" type="button"><svg viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="profile-row"><div class="pf-avatar"><svg viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><div class="pf-name" id="pfName">—</div><div class="pf-phone" dir="ltr" id="pfPhone">—</div></div><div class="meta-grid"><div class="meta-card"><div class="mc-icon mc-blue"><svg viewbox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div><div class="mc-label">نوع برنامه</div><div class="mc-value" id="mType">—</div><div class="mc-price" id="mTypePrice"></div></div><div class="meta-card"><div class="mc-icon mc-orange"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><div class="mc-label">زمان</div><div class="mc-value" id="mTime">—</div><div class="mc-price" id="mTimePrice"></div></div><div class="meta-card"><div class="mc-icon mc-purple"><svg viewbox="0 0 24 24"><circle cx="12" cy="9" r="6"></circle><path d="M12 15v7"></path></svg></div><div class="mc-label">مکان</div><div class="mc-value" id="mLoc">—</div><div class="mc-price" id="mLocPrice"></div><div class="mc-address" id="mAddress"></div></div></div><div class="extras-row" id="extrasSection" style="display:none"><span class="ex-label">افزودنی‌ها</span><div class="ex-tags" id="tagsContainer"></div></div><div class="note-row" id="noteLine" style="display:none"><span class="nt-label">توضیحات</span><span class="nt-text" id="noteText">—</span></div><div id="invoiceCard"></div></div><section class="receipt-actions"><a class="ra-btn ra-primary" href="#" id="adminBtn" rel="noopener" target="_blank"><svg viewbox="0 0 24 24"><line x1="22" x2="11" y1="2" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> ارسال رسید به ادمین </a></section></div><div class="toast" id="toast"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span id="toastText">کپی شد</span></div><script src="../done/app.js" type="module"></script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>رسید رزرو · ماساژ</title>
+    <link rel="stylesheet" href="../fonts/font.css" />
+    <link rel="stylesheet" href="../root.css" />
+    <link rel="stylesheet" href="../done/style.css" />
+</head>
+<body>
+
+<div class="screen">
+
+    <div class="nav-bar">
+        <button class="nav-btn" type="button" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            بازگشت
+        </button>
+        <span class="nav-title">رسید رزرو</span>
+        <span class="nav-spacer"></span>
+    </div>
+
+<header class="receipt-head">
+    <div class="rh-icon">
+        <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+        </svg>
+    </div>
+    <h2 class="rh-title">در انتظار تأیید ادمین</h2>
+    <p class="rh-sub">
+        تصویر این رسید را برای ادمین ارسال کنید تا رزرو نهایی شود
+    </p>
+    <div class="rh-divider"></div>
+</header>
+
+    <div class="receipt">
+        <div class="code-bar">
+            <span class="cb-label">کد پیگیری</span>
+            <span class="cb-value" id="trackingCode">—</span>
+            <button class="cb-copy" id="copyBtn" type="button" aria-label="کپی">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+        </div>
+        <div class="profile-row">
+            <div class="pf-avatar">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="pf-name" id="pfName">—</div>
+            <div class="pf-phone" id="pfPhone" dir="ltr">—</div>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-card">
+                <div class="mc-icon mc-blue">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <div class="mc-label">نوع برنامه</div>
+                <div class="mc-value" id="mType">—</div>
+                <div class="mc-price" id="mTypePrice"></div>
+            </div>
+            <div class="meta-card">
+                <div class="mc-icon mc-orange">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="mc-label">زمان</div>
+                <div class="mc-value" id="mTime">—</div>
+                <div class="mc-price" id="mTimePrice"></div>
+            </div>
+            <div class="meta-card">
+                <div class="mc-icon mc-purple">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M12 15v7"/></svg>
+                </div>
+                <div class="mc-label">مکان</div>
+                <div class="mc-value" id="mLoc">—</div>
+                <div class="mc-price" id="mLocPrice"></div>
+                <div class="mc-address" id="mAddress"></div>
+            </div>
+        </div>
+        <div class="extras-row" id="extrasSection" style="display:none">
+            <span class="ex-label">افزودنی‌ها</span>
+            <div class="ex-tags" id="tagsContainer"></div>
+        </div>
+        <div class="note-row" id="noteLine" style="display:none">
+            <span class="nt-label">توضیحات</span>
+            <span class="nt-text" id="noteText">—</span>
+        </div>
+        <div id="invoiceCard"></div>
+
+    </div>
+    <section class="receipt-actions">
+        <a class="ra-btn ra-primary" id="adminBtn" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            ارسال رسید به ادمین
+        </a>
+    </section>
+</div>
+
+<div class="toast" id="toast">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastText">کپی شد</span>
+</div>
+
+<script src="../done/app.js" type="module"></script>
+</body>
+</html>
