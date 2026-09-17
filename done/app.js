@@ -147,7 +147,7 @@ function renderExtras() {
 
 function buildAdminMessage() {
     const lines = [];
-    lines.push('✦ ─────── فرم درخواست کد ─────── ✦');
+    lines.push('✦─ فرم درخواست کد ─✦');
     lines.push('');
     lines.push('⌛️ پرداخت در محل');
     lines.push(`☑️ کد پیگیری: #${tracking}`);
