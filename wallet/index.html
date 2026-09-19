@@ -213,13 +213,13 @@
     function buildMessage() {
         let qr = Math.floor(10000 + Math.random() * 90000);
         const lines = [
-            `#${qr} - درخواست شارژ کیف پول`,
+            `#${qr} - درخواست رزرو با پیش پرداخت`,
             ' ',
             `🎖 کد : ${booking.code}`,
             `💳 مبلغ شارژ: ${formatFa(booking.prepayment)} تومان`,
             ' ',
             '⫸ شماره کارت: 6219861909856527 (حریمی) جهت واریزی',
-            '⫸ پس از ارسال رسید رزرو بطور خودکار نهایی میشود'
+            '⫸ پس از ارسال رسید واریزی، رزرو بطور خودکار نهایی میشود'
         ];
 
         if (booking.service   !== '—') lines.push(`خدمت: ${booking.service}`);
